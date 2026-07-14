@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coda-forge-3d"
+version = "1.0.0"
+description = "Photorealistic 3D human reconstruction from phone rotation videos"
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+keywords = ["3d-reconstruction", "photogrammetry", "human-modeling", "colmap", "mesh"]
+authors = [{name = "CODA Forge Contributors"}]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "numpy>=1.24",
+    "opencv-python>=4.8",
+    "Pillow>=10.0",
+    "trimesh>=4.0",
+    "scipy>=1.10",
+    "networkx>=3.0",
+    "scikit-image>=0.21",
+    "requests>=2.28",
+]
+
+[project.urls]
+Homepage = "https://github.com/coda-forge/coda-forge-3d"
+Repository = "https://github.com/coda-forge/coda-forge-3d"
+Documentation = "https://coda-forge-3d.readthedocs.io"
+
+[project.scripts]
+coda-forge = "codaforge.pipeline.orchestrator:main"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["codaforge*"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "W", "I"]
+ignore = ["E501", "E402", "E731"]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
