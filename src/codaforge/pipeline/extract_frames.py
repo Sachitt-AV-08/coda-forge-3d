@@ -1,7 +1,8 @@
 import os
+from pathlib import Path
+
 import cv2
 import numpy as np
-from pathlib import Path
 
 
 class FrameExtractor:
@@ -22,7 +23,6 @@ class FrameExtractor:
 
         Path(self.output_dir).mkdir(parents=True, exist_ok=True)
 
-        frames = []
         frame_idx = 0
         saved_idx = 0
         scores = []

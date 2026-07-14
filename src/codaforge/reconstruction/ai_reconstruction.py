@@ -5,8 +5,6 @@ import os
 import subprocess
 import sys
 
-import numpy as np
-
 from codaforge.reconstruction.config import detect_device
 from codaforge.reconstruction.model_registry import check_torch
 from codaforge.reconstruction.parametric_body import generate_parametric_mesh

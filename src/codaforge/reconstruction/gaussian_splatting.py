@@ -31,7 +31,6 @@ class GaussianSplatting:
         self, images_dir: str, colmap_dir: str | None, sparse_model: str
     ) -> dict:
         try:
-            import torch
 
             gs_dir = os.environ.get("GAUSSIAN_SPLATTING_DIR", "models/gaussian-splatting")
             train_script = os.path.join(gs_dir, "train.py")

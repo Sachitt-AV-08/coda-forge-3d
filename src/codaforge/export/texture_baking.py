@@ -5,7 +5,6 @@ import os
 
 import cv2
 import numpy as np
-
 from PIL import Image
 
 logger = logging.getLogger(__name__)
@@ -55,7 +54,7 @@ class TextureBaker:
             )
         except ImportError:
             uv_mesh = mesh.copy()
-            uvs = self._sphere_uv(mesh.vertices)
+            _ = self._sphere_uv(mesh.vertices)
 
         tex_size = 1024
         texture = np.zeros((tex_size, tex_size, 3), dtype=np.uint8)

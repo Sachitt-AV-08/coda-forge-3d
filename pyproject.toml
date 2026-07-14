@@ -31,9 +31,13 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/coda-forge/coda-forge-3d"
-Repository = "https://github.com/coda-forge/coda-forge-3d"
+Homepage = "https://github.com/Sachitt-AV-08/coda-forge-3d"
+Repository = "https://github.com/Sachitt-AV-08/coda-forge-3d"
 Documentation = "https://coda-forge-3d.readthedocs.io"
+
+[project.optional-dependencies]
+test = ["pytest", "ruff"]
+full = ["torch", "mediapipe", "rembg", "xatlas", "colmap"]
 
 [project.scripts]
 coda-forge = "codaforge.pipeline.orchestrator:main"
@@ -52,8 +56,11 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py310"
+
+[tool.ruff.lint]
 select = ["E", "F", "W", "I"]
 ignore = ["E501", "E402", "E731"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["F401"]
+

@@ -2,15 +2,13 @@ from __future__ import annotations
 
 import logging
 import shutil
-import subprocess
-import sys
 
 logger = logging.getLogger(__name__)
 
 
 def check_torch() -> bool:
     try:
-        import torch
+        import torch  # noqa: F401
 
         return True
     except ImportError:
