@@ -27,7 +27,12 @@ class ExportManager:
     ) -> dict:
         os.makedirs(self.output_dir, exist_ok=True)
 
-        mesh = trimesh.load(mesh_path)
+        try:
+            mesh = trimesh.load(mesh_path)
+        except Exception as e:
+            logger.error("Failed to load mesh %s: %s", mesh_path, e)
+            return {"success": False, "error": f"Failed to load mesh: {e}"}
+
         if mesh.is_empty or len(mesh.vertices) == 0 or mesh.vertices.shape[1] < 3:
             return {"success": False, "error": "Empty mesh"}
 
@@ -60,12 +65,15 @@ class ExportManager:
     def _export_textured_glb(
         self, mesh: trimesh.Trimesh, texture_path: str, path: str
     ) -> None:
+        """Export GLB with texture applied to the mesh material."""
+        import PIL.Image as PILImage
+
+        img = PILImage.open(texture_path)
         material = trimesh.visual.material.PBRMaterial(
-            baseColorTexture=None,
+            baseColorTexture=img,
             baseColorFactor=[1.0, 1.0, 1.0, 1.0],
         )
-        if mesh.visual.kind == "texture":
-            mesh.visual.material = material
+        mesh.visual.material = material
         mesh.export(path, file_type="glb")
 
     def export_obj(self, mesh: trimesh.Trimesh, path: str) -> None:

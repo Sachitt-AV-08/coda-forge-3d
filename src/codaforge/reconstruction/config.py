@@ -30,6 +30,8 @@ class PipelineConfig:
     debug: bool = False
 
     def __post_init__(self):
+        if not self.video_path:
+            raise ValueError("video_path is required")
         if not self.frames_dir:
             self.frames_dir = os.path.join(self.output_dir, "frames")
         if not self.depth_dir:
